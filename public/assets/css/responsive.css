@@ -1,0 +1,45 @@
+
+@media (max-width: 1399.98px) { 
+    .calc-row .input-group .form-control{width: 120px;}   
+}
+
+@media (min-width: 1200px) { 
+    .fix-label {
+        margin-top: -16px;
+    }   
+}
+@media (max-width: 1199.98px) {
+    .calc-row{
+        flex-wrap: wrap;
+    }
+    .calc-row li{
+        width: 100%;
+    }
+}
+
+@media (min-width: 992px) { 
+    .app main{min-width: calc(100% - 303px); }
+}
+
+@media (max-width: 991.98px) { 
+    body{font-size: 14px;}
+    .fs-18 {font-size: 16px;}
+    .app {grid-template-columns: 1fr;}
+    .app main{min-width: 100%; }
+    .sidebar {position: absolute;top: 0;left: -100%;z-index: 1030;}
+    .image-name{width: 140px;}
+}
+
+@media (max-width: 767.98px) { 
+    .file-checkbox-group{ width: 100%; flex-wrap: wrap;}
+    .image-name{width: 100%;}
+    .card .card-body,
+    .accordion-button,
+    .accordion-body{padding: 16px;}
+    .label-btn li p{width: 100%;}
+    .total-valuation li span{min-width: 100px;}
+    .pagination {justify-content: space-between !important;}
+    .pagination .page-link{padding: 8px 12px;}
+}
+
+@media (max-width: 575.98px) {  }
