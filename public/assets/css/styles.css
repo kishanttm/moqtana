@@ -533,8 +533,10 @@ body {
 .ck.ck-content{
     border-top: 0 !important;
 }
-#editor-container{
-    height: 200px;
+#editor-container .ck-content{
+    min-height: 200px;
+    max-height: 450px;
+    overflow-y: auto;
 }
 
 .image-name{width: 180px;}
@@ -618,4 +620,23 @@ body {
     display: flex;
     align-items: center;
     gap: 4px;
+}
+
+
+.swal2-popup .swal2-html-container{
+    padding: 0;
+}
+.swal2-popup .modal-header,
+.swal2-popup .modal-body,
+.swal2-popup .swal2-actions{
+    padding: 20px;
+}
+.swal2-popup .swal2-validation-message{
+    padding: 20px; margin: 10px 20px 0 20px; border-radius: 4px;
+}
+
+.signature-canvas {
+    width: 100%;      /* full width of container */
+    height: 200px;    /* fixed height */
+    display: block;
 }

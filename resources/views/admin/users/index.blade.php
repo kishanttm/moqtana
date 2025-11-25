@@ -66,7 +66,7 @@
                     </tbody>
                 </table>
                 @if ($users->hasPages())
-                    <ul class="pagination justify-content-end gap-1 flex-wrap mb-0">
+                    <ul class="pagination justify-content-end gap-1 flex-wrap mb-0 pt-3">
                         <!-- Prev -->
                         <li class="page-item {{ $users->onFirstPage() ? 'disabled' : '' }}"> <a class="page-link rounded-1 lh-1"  href="{{ $users->previousPageUrl() }}"><svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M11.3539 1.33737C11.4005 1.37511 11.4374 1.41994 11.4626 1.46929C11.4878 1.51865 11.5008 1.57156 11.5008 1.62499C11.5008 1.67843 11.4878 1.73134 11.4626 1.7807C11.4374 1.83005 11.4005 1.87488 11.3539 1.91262L5.70692 6.49999L11.3539 11.0874C11.4478 11.1637 11.5005 11.2671 11.5005 11.375C11.5005 11.4829 11.4478 11.5863 11.3539 11.6626C11.26 11.7389 11.1327 11.7818 10.9999 11.7818C10.8671 11.7818 10.7398 11.7389 10.6459 11.6626L4.64592 6.78762C4.59935 6.74988 4.56241 6.70505 4.5372 6.6557C4.512 6.60634 4.49902 6.55343 4.49902 6.49999C4.49902 6.44656 4.512 6.39365 4.5372 6.34429C4.56241 6.29494 4.59935 6.25011 4.64592 6.21237L10.6459 1.33737C10.6924 1.29954 10.7475 1.26952 10.8083 1.24904C10.869 1.22856 10.9342 1.21802 10.9999 1.21802C11.0657 1.21802 11.1308 1.22856 11.1916 1.24904C11.2523 1.26952 11.3075 1.29954 11.3539 1.33737Z" fill="#ADB5BD"/></svg>{{$cmsTranslations['previous']->name}}</a></li>
                         @php
@@ -107,12 +107,28 @@
                 const deleteuser = this.dataset.user;
 
                 Swal.fire({
-                    title: deleteuser,
-                    text: "Are your sure you want to delete the user?",
+                    html: `
+                        <div class="border-bottom modal-header d-flex justify-content-between">
+                            <h3 class="modal-title fs-5 fw-bold">`+ deleteuser +`</h3>
+                            <button type="button" class="btn-close"></button>
+                        </div>
+                        <div class="modal-body pb-0">
+                            <h5 class="fw-bold mb-4">Are your sure you want to delete the user?</h5>
+                        </div>
+                    `,
                     showCancelButton: true,
                     confirmButtonColor: '#d33',
                     cancelButtonColor: '#3085d6',
-                    confirmButtonText: 'Delete'
+                    confirmButtonText: 'Delete',
+                    didOpen: () => {
+                        const closeBtn = Swal.getHtmlContainer().querySelector('.btn-close');
+
+                        if (closeBtn) {
+                            closeBtn.addEventListener('click', () => {
+                                Swal.close();
+                            });
+                        }
+                    }
                 }).then((result) => {
                     if (result.isConfirmed) {
                         fetch(deleteUrl, {
@@ -127,25 +143,50 @@
                         .then(data => {
                             if (data.success) {
                                 Swal.fire({
-                                    title: 'Deleted!',
-                                    text: data.message,
+                                    html: `
+                                        <div class="border-bottom modal-header d-flex justify-content-between">
+                                            <h3 class="modal-title fs-5 fw-bold">Deleted!</h3>
+                                            <button type="button" class="btn-close"></button>
+                                        </div>
+                                        <div class="modal-body pb-0">
+                                            <h5 class="fw-bold mb-4">`+data.message+`</h5>
+                                        </div>
+                                    `,
                                     showConfirmButton: false, 
                                     timer: 1000
                                 });
                                 // Optionally remove the row or refresh the UI
                                 this.closest('tr')?.remove();
                             } else {
-                                Swal.fire(
-                                    'Error!',
-                                    data.message,
-                                );
+                                Swal.fire({
+                                    html: `
+                                        <div class="border-bottom modal-header d-flex justify-content-between">
+                                            <h3 class="modal-title fs-5 fw-bold">Error!</h3>
+                                            <button type="button" class="btn-close"></button>
+                                        </div>
+                                        <div class="modal-body pb-0">
+                                            <h5 class="fw-bold mb-4">`+data.message+`</h5>
+                                        </div>
+                                        `,
+                                    showConfirmButton: false,
+                                    timer: 1000
+                                });
                             }
                         })
                         .catch(error => {
-                            Swal.fire(
-                                'Error!',
-                                'An unexpected error occurred.',
-                            );
+                            Swal.fire({
+                                html: `
+                                    <div class="border-bottom modal-header d-flex justify-content-between">
+                                        <h3 class="modal-title fs-5 fw-bold">Error!</h3>
+                                        <button type="button" class="btn-close"></button>
+                                    </div>
+                                    <div class="modal-body pb-0">
+                                        <h5 class="fw-bold mb-4">An unexpected error occurred.</h5>
+                                    </div>
+                                    `,
+                                showConfirmButton: false,
+                                timer: 1000
+                            });
                         });
                     }
                 });

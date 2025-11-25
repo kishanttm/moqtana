@@ -10,4 +10,9 @@ class Comment extends Model
     use HasFactory;
 
     protected $fillable = ['name'];
+
+    public function GjpItemGemStone()
+    {
+        return $this->hasMany(GjpItemGemStone::class, 'comment_id');
+    }
 }

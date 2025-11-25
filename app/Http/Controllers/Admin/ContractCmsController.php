@@ -19,6 +19,12 @@ class ContractCmsController extends Controller
         $request->validate([
             'contract_en' => 'required|string',
             'contract_ar' => 'required|string',
+        ], [
+            'contract_en.required' => 'Contract in English is required.',
+            'contract_en.string'   => 'Contract in English must be a valid text.',
+
+            'contract_ar.required' => 'Contract in Arabic is required.',
+            'contract_ar.string'   => 'Contract in Arabic must be a valid text.',
         ]);
 
         $contract = ContractCms::first();

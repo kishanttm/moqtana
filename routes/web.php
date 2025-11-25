@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ContractCmsController;
 use App\Http\Controllers\Admin\MiscCmsController;
 use App\Http\Controllers\Admin\ServiceOrderController;
 use App\Http\Controllers\Admin\TranslationCmsController;
+use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,7 +48,14 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::middleware(['role:superadmin|tech manager|user'])->prefix('admin')->name('admin.')->group(function () {
+        Route::get('service-orders/signature-content/{id}', [ServiceOrderController::class, 'getSignatureContent'])->name('service-orders.signature-content');
+        Route::post('service-orders/upload-signature', [ServiceOrderController::class, 'uploadSignature'])->name('service-orders.upload-signature');
+        Route::post('service-orders/submit', [ServiceOrderController::class, 'submitOrder'])->name('service-orders.submit');
         Route::resource('service-orders', ServiceOrderController::class);
+        Route::get('clients/get-by-id/{client}', [ClientController::class, 'getById'])->name('clients.getById');
+
+        Route::resource('tests', TestController::class);
+
     });
     
     // Clients CRUD - Superadmin and Tech Manager

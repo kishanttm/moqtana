@@ -207,8 +207,15 @@
                 const name = deleteclient.client_type == "individual" ? deleteclient.individual_name : deleteclient.company_name;
 
                 Swal.fire({
-                    title: name,
-                    text: "Are your sure you want to delete the user?",
+                    html: `
+                        <div class="border-bottom modal-header d-flex justify-content-between">
+                            <h3 class="modal-title fs-5 fw-bold">`+ name +`</h3>
+                            <button type="button" class="btn-close"></button>
+                        </div>
+                        <div class="modal-body pb-0">
+                            <h5 class="fw-bold mb-4">Are your sure you want to delete the client?</h5>
+                        </div>
+                    `,
                     showCancelButton: true,
                     confirmButtonColor: '#d33',
                     cancelButtonColor: '#3085d6',
@@ -227,25 +234,66 @@
                         .then(data => {
                             if (data.success) {
                                 Swal.fire({
-                                    title: 'Deleted!',
-                                    text: data.message,
+                                    html: `
+                                        <div class="border-bottom modal-header d-flex justify-content-between">
+                                            <h3 class="modal-title fs-5 fw-bold">Deleted!</h3>
+                                            <button type="button" class="btn-close"></button>
+                                        </div>
+                                        <div class="modal-body pb-0">
+                                            <h5 class="fw-bold mb-4">`+data.message+`</h5>
+                                        </div>
+                                    `,
                                     showConfirmButton: false, 
                                     timer: 1000
                                 });
                                 // Optionally remove the row or refresh the UI
                                 window.location.href = "{{ route('clients.index') }}"
                             } else {
-                                Swal.fire(
-                                    'Error!',
-                                    data.message,
-                                );
+                                Swal.fire({
+                                    html: `
+                                        <div class="border-bottom modal-header d-flex justify-content-between">
+                                            <h3 class="modal-title fs-5 fw-bold">Error!</h3>
+                                            <button type="button" class="btn-close"></button>
+                                        </div>
+                                        <div class="modal-body pb-0">
+                                            <h5 class="fw-bold mb-4">${data.message}</h5>
+                                        </div>
+                                    `,
+                                    timer: 1000,
+
+                                    didOpen: () => {
+                                        const closeBtn = Swal.getHtmlContainer().querySelector('.btn-close');
+                                        if (closeBtn) {
+                                            closeBtn.addEventListener('click', () => {
+                                                Swal.close();
+                                            });
+                                        }
+                                    }
+                                });
                             }
                         })
                         .catch(error => {
-                            Swal.fire(
-                                'Error!',
-                                'An unexpected error occurred.',
-                            );
+                            Swal.fire({
+                                html: `
+                                    <div class="border-bottom modal-header d-flex justify-content-between">
+                                        <h3 class="modal-title fs-5 fw-bold">Error!</h3>
+                                        <button type="button" class="btn-close"></button>
+                                    </div>
+                                    <div class="modal-body pb-0">
+                                        <h5 class="fw-bold mb-4">An unexpected error occurred.</h5>
+                                    </div>
+                                `,
+                                timer: 1000,
+
+                                didOpen: () => {
+                                    const closeBtn = Swal.getHtmlContainer().querySelector('.btn-close');
+                                    if (closeBtn) {
+                                        closeBtn.addEventListener('click', () => {
+                                            Swal.close();
+                                        });
+                                    }
+                                }
+                            });
                         });
                     }
                 });

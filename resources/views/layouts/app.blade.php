@@ -10,11 +10,14 @@
         <link rel="stylesheet" href="{{url('/')}}/assets/plugins/bootstrap/bootstrap.min.css">
         <link rel="stylesheet" href="{{url('/')}}/assets/plugins/datatables/jquery.dataTables.min.css">
         <link rel="stylesheet" href="{{url('/')}}/assets/plugins/datatables/dataTables.responsive.css">
+        <link rel="stylesheet" href="{{url('/')}}/assets/plugins/dropify/dropify.min.css">
 
         <!-- Project CSS -->
         <link rel="stylesheet" href="{{url('/')}}/assets/css/styles.css">
         <link rel="stylesheet" href="{{url('/')}}/assets/css/responsive.css">
         <link rel="stylesheet" href="{{url('/')}}/assets/css/datatable.css">
+        <link rel="stylesheet" href="{{url('/')}}/assets/css/dropify.css">
+
 
     </head>
     <body class="font-sans antialiased">
@@ -28,6 +31,7 @@
                 </div>
             </main>
         </div>
+        @yield('content-model')
         <script src="{{url('/')}}/assets/plugins/jquery/jquery.min.js"></script>
         <script src="{{url('/')}}/assets/plugins/bootstrap/bootstrap.bundle.min.js"></script>
         <script src="{{url('/')}}/assets/plugins/datatables/jquery.dataTables.min.js"></script>
@@ -36,6 +40,9 @@
         @stack('script')
         <script>
             document.addEventListener("DOMContentLoaded", function () {
+                const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+                const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+                
                 const toastElList = document.querySelectorAll('.toast');
                 const toastList = [...toastElList].map(toastEl => new bootstrap.Toast(toastEl,{ delay: 5000 }));
                 toastList.forEach(toast => toast.show());

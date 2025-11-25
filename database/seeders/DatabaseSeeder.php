@@ -73,6 +73,7 @@ class DatabaseSeeder extends Seeder
             ContractCmsSeeder::class,
             CmsMasterSeeder::class,
             TranslationCmsSeeder::class,
+            MiscCmsMasterSeeder::class
         ]);
     }
 }

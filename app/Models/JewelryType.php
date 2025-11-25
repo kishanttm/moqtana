@@ -10,4 +10,9 @@ class JewelryType extends Model
     use HasFactory;
 
     protected $fillable = ['name'];
+
+    public function gjpItems()
+    {
+        return $this->hasMany(GjpItem::class, 'jewellery_type_id');
+    }
 }

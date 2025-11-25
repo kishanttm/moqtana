@@ -46,6 +46,10 @@ class ClientController extends Controller
 
     public function show(Client $client)
     {
+         if (request()->expectsJson() || request()->wantsJson()) {
+            return response()->json($client);
+        }
+        
         return view('admin.clients.show', compact('client'));
     }
 
@@ -97,6 +101,11 @@ class ClientController extends Controller
         }
 
         return redirect()->route('clients.index')->with('success', 'Client deleted');
+    }
+
+    public function getById(Client $client)
+    {
+        return response()->json($client);
     }
 }
 

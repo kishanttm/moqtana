@@ -12,8 +12,8 @@
                 <div class="offcanvas-body">
                     <ul class="nav flex-column gap-1 side-nav w-100">
                         <li><a class="nav-link {{ Request::is('dashboard*') ? 'active' : '' }}" href="{{ route('dashboard') }}">{{ $cmsTranslations['dashboard']->name }}</a></li>
-                        <!-- <li><a class="nav-link" href="front-desk.html">Front Desk</a></li>
-                        <li><a class="nav-link" href="tests.html">Tests</a></li>
+                        <li><a class="nav-link {{ Request::is('admin/service-orders*') ? 'active' : '' }}" href="{{ route('admin.service-orders.index') }}">{{ $cmsTranslations['front_desk']->name }}</a></li>
+                        <!--<li><a class="nav-link" href="tests.html">Tests</a></li>
                         <li><a class="nav-link" href="valuation.html">Valuation</a></li> -->
                         @role('superadmin|tech manager')
                         <li class="sub-menu {{ (Request::is('admin/clients*') || Request::is('admin/users*')) ? 'active' : '' }}">
@@ -36,12 +36,12 @@
                             </div>
                         </li> -->
                         <!-- <li><a class="nav-link" href="archive.html">Archive</a></li> -->
-                        <li class="sub-menu {{ (Request::is('admin/contract-cms*') || Request::is('admin/translations-cms*')) ? 'active' : '' }}">
+                        <li class="sub-menu {{ (Request::is('admin/contract-cms*') || Request::is('admin/translations-cms*') || Request::is('admin/misc-cms*')) ? 'active' : '' }}">
                             <p class="mb-0">{{ $cmsTranslations['cms']->name }}</p>
                             <ul class="list-unstyled ps-3 pb-2">
-                                <!-- <li><a class="nav-link ms-1" href="{{ route('admin.contract.cms') }}">Contract CMS</a></li> -->
+                                <li><a class="nav-link ms-1 {{ Request::is('admin/contract-cms*') ? 'active' : '' }}" href="{{ route('admin.contract.cms') }}">{{ $cmsTranslations['contract_cms']->name }}</a></li>
                                 <li><a class="nav-link ms-1 {{ Request::is('admin/translations-cms*') ? 'active' : '' }}" href="{{ route('admin.translations-cms.index') }}">{{ $cmsTranslations['translation_cms']->name }}</a></li>
-                                <!-- <li><a class="nav-link ms-1" href="{{ route('admin.misc-cms.index') }}">Misc. CMS</a></li> -->
+                                <li><a class="nav-link ms-1 {{ Request::is('admin/misc-cms*') ? 'active' : '' }}" href="{{ route('admin.misc-cms.index') }}">{{ $cmsTranslations['misc_cms']->name }}</a></li>
                             </ul>
                         </li>
                         <!-- <li class="sub-menu">
