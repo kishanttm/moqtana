@@ -30,4 +30,29 @@ class Test extends Model
     {
         return $this->hasMany(GjpItemGemStone::class);
     }
+
+    public function allArticlesAdded(): bool
+    {
+        if (!$this->serviceOrder) {
+            return false;
+        }
+
+        // Total articles in service order
+        $totalArticles = $this->serviceOrder->articles->count();
+
+        if ($totalArticles === 0) {
+            return false;
+        }
+
+        // How many articles exist in test as metals or gemstones
+        $addedArticleIds = collect()
+            ->merge($this->metals->pluck('gjp_item_id'))
+            ->merge($this->gemStones->pluck('gjp_item_id'))
+            ->unique()
+            ->filter()
+            ->count();
+
+        return $addedArticleIds === $totalArticles;
+    }
+
 }

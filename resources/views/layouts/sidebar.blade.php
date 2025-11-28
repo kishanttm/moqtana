@@ -13,9 +13,9 @@
                     <ul class="nav flex-column gap-1 side-nav w-100">
                         <li><a class="nav-link {{ Request::is('dashboard*') ? 'active' : '' }}" href="{{ route('dashboard') }}">{{ $cmsTranslations['dashboard']->name }}</a></li>
                         <li><a class="nav-link {{ Request::is('admin/service-orders*') ? 'active' : '' }}" href="{{ route('admin.service-orders.index') }}">{{ $cmsTranslations['front_desk']->name }}</a></li>
-                        <!--<li><a class="nav-link" href="tests.html">Tests</a></li>
-                        <li><a class="nav-link" href="valuation.html">Valuation</a></li> -->
+                        <!--<li><a class="nav-link" href="valuation.html">Valuation</a></li> -->
                         @role('superadmin|tech manager')
+                        <li><a class="nav-link {{ Request::is('admin/tests*') ? 'active' : '' }}" href="{{ route('admin.tests.index') }}">{{ $cmsTranslations['tests']->name }}</a></li>
                         <li class="sub-menu {{ (Request::is('admin/clients*') || Request::is('admin/users*')) ? 'active' : '' }}">
                             <p class="mb-0">{{ $cmsTranslations['control_panel']->name }}</p>
                             <ul class="list-unstyled ps-3 pb-2">

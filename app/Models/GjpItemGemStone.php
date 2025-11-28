@@ -33,6 +33,9 @@ class GjpItemGemStone extends Model
         'estimated_id',
         'identification_id',
         'comment_id',
+        'weight_stone_unit_id',
+        'total_weight_unit_id',
+        'internal_comment'
     ];
 
     public function gjpItem()
@@ -113,5 +116,16 @@ class GjpItemGemStone extends Model
     public function comment()
     {
         return $this->belongsTo(Comment::class);
+    }
+
+    public function weightStoneUnit()
+    {
+        return $this->belongsTo(Unit::class, 'weight_stone_unit_id');
+    }
+
+    // Total weight unit
+    public function totalWeightUnit()
+    {
+        return $this->belongsTo(Unit::class, 'total_weight_unit_id');
     }
 }

@@ -70,4 +70,8 @@ class ServiceOrder extends Model
     {
         return $this->belongsTo(PurposeOfValuation::class, 'purpose_id');
     }
+
+    public function test()
+    {
+    return $this->hasOne(Test::class, 'service_order_id');    }
 }

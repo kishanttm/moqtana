@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', __('Translation CMS'))
+@section('title', __('Contract CMS'))
 
 @section('content')
     <div class="d-flex align-items-center justify-content-between mb-3">

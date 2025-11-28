@@ -428,13 +428,11 @@
                             </div>
                         </div>
 
-                        @if($index > 0)
                         <div class="mt-3 text-end">
                             <button type="button" class="btn btn-sm btn-danger remove-article">
                                 <i class="fas fa-trash"></i> {{ $cmsTranslations['remove_article']->name }}
                             </button>
                         </div>
-                        @endif
                     </div>
                     @endforeach
                 </div>

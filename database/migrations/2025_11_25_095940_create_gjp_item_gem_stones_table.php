@@ -21,9 +21,18 @@ return new class extends Migration
 
             $table->integer('number_of_stones')->nullable();
             $table->string('weight_per_stone')->nullable();
+
+            $table->unsignedBigInteger('weight_stone_unit_id')->nullable();
+            $table->foreign('weight_stone_unit_id')->references('id')->on('units')->onDelete('cascade');
+
             $table->string('total_weight')->nullable();
+            
+            $table->unsignedBigInteger('total_weight_unit_id')->nullable();
+            $table->foreign('total_weight_unit_id')->references('id')->on('units')->onDelete('cascade');
+
             $table->string('measurement')->nullable();
             $table->string('plotting')->nullable();
+            $table->string('internal_comment')->nullable();
             $table->foreignId('shape_id')->nullable()->constrained()->cascadeOnDelete();
             $table->foreignId('cut_grade_id')->nullable()->constrained()->cascadeOnDelete();
             $table->foreignId('color_id')->nullable()->constrained()->cascadeOnDelete();

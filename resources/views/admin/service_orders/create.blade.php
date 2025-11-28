@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', __('Create Service Order'))
 @section('content')
 <div class="d-flex align-items-center justify-content-between mb-3">
     <div>

@@ -70,54 +70,70 @@ class MiscCmsDataRequest extends FormRequest
             // Shape
             'shapes' => ['array'],
             'shapes.*.name' => ['required','string'],
+            'shapes.*.id' => ['sometimes'],
+
 
             // Cut Grade
             'cutGrades' => ['array'],
             'cutGrades.*.name' => ['required','string'],
+            'cutGrades.*.id' => ['sometimes'],
+
 
             // Gem Color
             'gemColors' => ['array'],
             'gemColors.*.name' => ['required','string'],
+            'gemColors.*.id' => ['sometimes'],
 
             // Clarity
             'clarities' => ['array'],
             'clarities.*.name' => ['required','string'],
+            'clarities.*.id' => ['sometimes'],
 
             // Group
             'groups' => ['array'],
             'groups.*.name' => ['required','string'],
+            'groups.*.id' => ['sometimes'],
 
             // Transparency
             'transparencies' => ['array'],
             'transparencies.*.name' => ['required','string'],
+            'transparencies.*.id' => ['sometimes'],
 
             // Luster
             'lusters' => ['array'],
             'lusters.*.name' => ['required','string'],
+            'lusters.*.id' => ['sometimes'],
 
             // Species
             'species' => ['array'],
             'species.*.name' => ['required','string'],
+            'species.*.id' => ['sometimes'],
 
             // Variety
             'varieties' => ['array'],
             'varieties.*.name' => ['required','string'],
+            'varieties.*.id' => ['sometimes'],
 
             // Fluorescence
             'fluorescences' => ['array'],
             'fluorescences.*.name' => ['required','string'],
+            'fluorescences.*.id' => ['sometimes'],
 
             // Phenomena
             'phenomenas' => ['array'],
             'phenomenas.*.name' => ['required','string'],
+            'phenomenas.*.id' => ['sometimes'],
 
             // Estimated
             'estimateds' => ['array'],
             'estimateds.*.name' => ['required','string'],
+            'estimateds.*.id' => ['sometimes'],
 
             // Identification
             'identifications' => ['array'],
             'identifications.*.name' => ['required','string'],
+            'identifications.*.id' => ['sometimes'],
+
         ];
     }
 

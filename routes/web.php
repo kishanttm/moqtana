@@ -7,7 +7,7 @@ use App\Http\Controllers\Admin\ContractCmsController;
 use App\Http\Controllers\Admin\MiscCmsController;
 use App\Http\Controllers\Admin\ServiceOrderController;
 use App\Http\Controllers\Admin\TranslationCmsController;
-use App\Http\Controllers\TestController;
+use App\Http\Controllers\Admin\TestController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -55,7 +55,10 @@ Route::middleware('auth')->group(function () {
         Route::get('clients/get-by-id/{client}', [ClientController::class, 'getById'])->name('clients.getById');
 
         Route::resource('tests', TestController::class);
+    });
 
+    Route::middleware(['role:superadmin|tech manager'])->prefix('admin')->name('admin.')->group(function () {
+        Route::resource('tests', TestController::class);
     });
     
     // Clients CRUD - Superadmin and Tech Manager
@@ -79,6 +82,16 @@ Route::get('/migrate-fresh', function () {
 
 Route::get('/seed', function () {
     Artisan::call('db:seed');
+});
+Route::get('/seed/{class}', function ($class) {
+
+    $className = "Database\\Seeders\\{$class}";
+
+    Artisan::call('db:seed', [
+        '--class' => $className
+    ]);
+
+    return "Seeder {$class} executed successfully!";
 });
 Route::get('/optimize', function () {
     Artisan::call('optimize');

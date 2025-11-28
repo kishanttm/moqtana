@@ -56,4 +56,14 @@ class GjpItem extends Model
     {
         return $this->belongsTo(StuddedStone::class, 'studded_stone_id');
     }
+
+    public function gjpItemGemStone()
+    {
+        return $this->hasMany(GjpItemGemStone::class);
+    }
+
+    public function gjpItemMetal()
+    {
+        return $this->hasMany(GjpItemMetal::class);
+    }
 }

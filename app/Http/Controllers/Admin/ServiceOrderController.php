@@ -12,6 +12,7 @@ use App\Models\GjpItemImage;
 use App\Models\JewelryType;
 use App\Models\PurposeOfValuation;
 use App\Models\StuddedStone;
+use App\Models\Test;
 use App\Models\Unit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -395,6 +396,8 @@ class ServiceOrderController extends Controller
                     if ($article->invoice_file) Storage::disk('public')->delete($article->invoice_file);
                     if ($article->attachment_file) Storage::disk('public')->delete($article->attachment_file);
                     // Delete article
+                    $article->gjpItemGemStone()->delete();
+                    $article->gjpItemMetal()->delete();
                     $article->delete();
                 }
             }
@@ -436,6 +439,11 @@ class ServiceOrderController extends Controller
             }
 
             // Delete the service order
+            $serviceOrder->test?->metals()->delete();
+            $serviceOrder->test?->gemStones()->delete();
+            
+            $serviceOrder->articles()->delete();
+            $serviceOrder->test()->delete();
             $serviceOrder->delete();
 
             DB::commit();
@@ -448,7 +456,8 @@ class ServiceOrderController extends Controller
             DB::rollBack();
             return response()->json([
                 'success' => false,
-                'message' => 'Something went wrong!'
+                'message' => 'Something went wrong!',
+                'body' => $e->getMessage()
             ]);
         }
     }
@@ -521,8 +530,15 @@ class ServiceOrderController extends Controller
         if (!$order) {
             return response()->json(['status' => false, 'message' => 'Order not found'], 404);
         }
-
+        do {
+            $orderNumber = 'SO' . rand(10000, 99999).'T';
+        } while (Test::where('order_number', $orderNumber)->exists());
+        Test::create([
+            'order_number' => $orderNumber,
+            'service_order_id' => $order->id
+        ]);
         $order->is_submited = true;
+        $order->status = "Submited";
         $order->save();
 
         return response()->json([

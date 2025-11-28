@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', __('View Service Order'))
 @section('content')
 <!-- breadcrumb -->
 <div class="d-flex align-items-center justify-content-between mb-3">
@@ -27,7 +27,7 @@
                                     <select class="form-select">
                                         <option selected>{{ $serviceOrder->client->individual_name ?? ''}}</option>
                                     </select>
-                                    <a class="btn btn-accent text-white d-flex align-items-center" type="button" href="{{ route('admin.service-orders.create') }}">{{ $cmsTranslations['add_client']->name }}</a>
+                                    <a class="btn btn-accent text-white d-flex align-items-center" type="button" href="{{ route('clients.create') }}">{{ $cmsTranslations['add_client']->name }}</a>
                                 </div>
                             </div>
                         </div>
@@ -121,11 +121,11 @@
                     @else
                         <div class="col-lg-4 col-md-6">
                             <p class="text-muted mb-2">{{ $cmsTranslations['purpose_of_valuation']->name }}</p>
-                            <h5 class="fs-18 mb-0">{{ '-' }}</h5>
+                            <h5 class="fs-18 mb-0">{{ $serviceOrder->purposeOfValuation->name ?? "-" }}</h5>
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <p class="text-muted mb-2">{{ $cmsTranslations['other_owners']->name }}</p>
-                            <h5 class="fs-18 mb-0">{{ $serviceOrder->has_other_owners  ?? '-' }}</h5>
+                            <h5 class="fs-18 mb-0">{{ $serviceOrder->has_other_owners ? 'Yes' : 'No' }}</h5>
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <p class="text-muted mb-2">{{ $cmsTranslations['how_many']->name }}</p>
@@ -169,11 +169,11 @@
                             </div>
                             <div class="col-lg-4 col-md-6">
                                 <p class="text-muted mb-2">{{ $cmsTranslations['total_weight']->name }}</p>
-                                <h5 class="fs-18 mb-0">{{ $article->total_weight ?? '-' }} {{ $article->weight_unit ?? '-' }}</h5>
+                                <h5 class="fs-18 mb-0">{{ $article->total_weight ?? '-' }} {{ $article?->weightUnit?->name ?? '-' }}</h5>
                             </div>
                             <div class="col-lg-4 col-md-6">
                                 <p class="text-muted mb-2">{{ $cmsTranslations['studded_stones']->name }}</p>
-                                <h5 class="fs-18 mb-0">-</h5>
+                                <h5 class="fs-18 mb-0">{{ $article?->studdedStone?->name ?? ''}}</h5>
                             </div>
                             <div class="col-12">
                                 <ul class="list-unstyled">
@@ -206,7 +206,11 @@
     @endif
     <div class="col-12">
         <div class="page-action mt-2">
-            <a class="btn btn-big btn-accent text-white" href="{{ route('admin.service-orders.edit', $serviceOrder) }}">{{ $cmsTranslations['edit']->name }}</a>
+            @if(auth()->user()->hasRole('superadmin'))
+                <a class="btn btn-big btn-accent text-white" href="{{ route('admin.service-orders.edit', $serviceOrder) }}">{{ $cmsTranslations['edit']->name }}</a>
+            @elseif(!$serviceOrder->is_submited)
+                <a class="btn btn-big btn-accent text-white" href="{{ route('admin.service-orders.edit', $serviceOrder) }}">{{ $cmsTranslations['edit']->name }}</a>
+            @endif
             <a class="btn btn-big btn-danger delete-client-button" data-url="{{ route('admin.service-orders.destroy', $serviceOrder) }}" data-client="{{ $serviceOrder }}">{{ $cmsTranslations['delete']->name }}</a>
             <a class="btn btn-big btn-secondary btn-cancel" href="{{ route('admin.service-orders.index') }}">{{ $cmsTranslations['cancel']->name }}</a>
         </div>
@@ -282,7 +286,7 @@
                                     timer: 1000
                                 });
                                 // Optionally remove the row or refresh the UI
-                                this.closest('tr')?.remove();
+                                window.location.href = "{{ route('admin.service-orders.index') }}";
                             } else {
                                 Swal.fire({
                                     html: `
