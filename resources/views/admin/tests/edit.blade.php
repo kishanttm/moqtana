@@ -93,64 +93,64 @@
                                 @endif
                             </div>
                         </div>
-                        <!-- accordion 2 -->
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ServiceOrderDetails" aria-expanded="false" aria-controls="ServiceOrderDetails">
-                                    <h5 class="mb-0 text-secondary">{{ $cmsTranslations['service_order_details']->name }}</h5>
-                                </div>
+                    </div>
+                    <!-- accordion 2 -->
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ServiceOrderDetails" aria-expanded="false" aria-controls="ServiceOrderDetails">
+                                <h5 class="mb-0 text-secondary">{{ $cmsTranslations['service_order_details']->name }}</h5>
                             </div>
-                            <div id="ServiceOrderDetails" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <div class="row g-lg-4 g-3">
-                                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-                                            <p class="text-muted mb-2">{{ $cmsTranslations['choose_service']->name }}</p>
-                                            <h5 class="fs-18 mb-0">{{ ucfirst($serviceOrder->service_type) ?? '-' }}</h5>
-                                        </div>
-                                        @if($serviceOrder->service_type == 'consultation')
-                                            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-                                                <p class="text-muted mb-2">{{ $cmsTranslations['consultation_type']->name }}</p>
-                                                <h5 class="fs-18 mb-0">{{ $serviceOrder->consultation  ?? '-' }}</h5>
-                                            </div>
-                                            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-                                                <p class="text-muted mb-2">{{ $cmsTranslations['delivery_date']->name }}</p>
-                                                <h5 class="fs-18 mb-0">{{ \Carbon\Carbon::parse($serviceOrder->delivery_date)->format('d M Y')  ?? '-' }}</h5>
-                                            </div>
-                                        @else
-                                            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-                                                <p class="text-muted mb-2">{{ $cmsTranslations['purpose_of_valuation']->name }}</p>
-                                                <h5 class="fs-18 mb-0">{{ $serviceOrder->purposeOfValuation->name ?? "-" }}</h5>
-                                            </div>
-                                            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-                                                <p class="text-muted mb-2">{{ $cmsTranslations['other_owners']->name }}</p>
-                                                <h5 class="fs-18 mb-0">{{ $serviceOrder->has_other_owners ? 'Yes' : 'No' }}</h5>
-                                            </div>
-                                            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-                                                <p class="text-muted mb-2">{{ $cmsTranslations['how_many']->name }}</p>
-                                                <h5 class="fs-18 mb-0">{{ $serviceOrder->how_many  ?? '-' }}</h5>
-                                            </div>
-                                            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-                                                <p class="text-muted mb-2">{{ $cmsTranslations['your_percentage']->name }}</p>
-                                                <h5 class="fs-18 mb-0">{{ $serviceOrder->ownership_percentage  ?? '-' }}</h5>
-                                            </div>
-                                            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-                                                <p class="text-muted mb-2">{{ $cmsTranslations['government_referral']->name }}</p>
-                                                <h5 class="fs-18 mb-0">{{ $serviceOrder->government_referral  ?? '-' }}</h5>
-                                            </div>
-                                            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-                                                <p class="text-muted mb-2">{{ $cmsTranslations['any_other_use']->name }} </p>
-                                                <h5 class="fs-18 mb-0">{{ $serviceOrder->other_use_of_report  ?? '-' }}</h5>
-                                            </div>
-                                            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-                                                <p class="text-muted mb-2">{{ $cmsTranslations['delivery_date']->name }}</p>
-                                                <h5 class="fs-18 mb-0">{{ \Carbon\Carbon::parse($serviceOrder->delivery_date)->format('d M Y')  ?? '-' }}</h5>
-                                            </div>
-                                            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-                                                <p class="text-muted mb-2">{{ $cmsTranslations['comment']->name }}</p>
-                                                <h5 class="fs-18 mb-0">{{ $serviceOrder->comment  ?? '-' }}</h5>
-                                            </div>
-                                        @endif
+                        </div>
+                        <div id="ServiceOrderDetails" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <div class="row g-lg-4 g-3">
+                                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                                        <p class="text-muted mb-2">{{ $cmsTranslations['choose_service']->name }}</p>
+                                        <h5 class="fs-18 mb-0">{{ ucfirst($serviceOrder->service_type) ?? '-' }}</h5>
                                     </div>
+                                    @if($serviceOrder->service_type == 'consultation')
+                                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                                            <p class="text-muted mb-2">{{ $cmsTranslations['consultation_type']->name }}</p>
+                                            <h5 class="fs-18 mb-0">{{ $serviceOrder->consultation  ?? '-' }}</h5>
+                                        </div>
+                                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                                            <p class="text-muted mb-2">{{ $cmsTranslations['delivery_date']->name }}</p>
+                                            <h5 class="fs-18 mb-0">{{ \Carbon\Carbon::parse($serviceOrder->delivery_date)->format('d M Y')  ?? '-' }}</h5>
+                                        </div>
+                                    @else
+                                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                                            <p class="text-muted mb-2">{{ $cmsTranslations['purpose_of_valuation']->name }}</p>
+                                            <h5 class="fs-18 mb-0">{{ $serviceOrder->purposeOfValuation->name ?? "-" }}</h5>
+                                        </div>
+                                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                                            <p class="text-muted mb-2">{{ $cmsTranslations['other_owners']->name }}</p>
+                                            <h5 class="fs-18 mb-0">{{ $serviceOrder->has_other_owners ? 'Yes' : 'No' }}</h5>
+                                        </div>
+                                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                                            <p class="text-muted mb-2">{{ $cmsTranslations['how_many']->name }}</p>
+                                            <h5 class="fs-18 mb-0">{{ $serviceOrder->how_many  ?? '-' }}</h5>
+                                        </div>
+                                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                                            <p class="text-muted mb-2">{{ $cmsTranslations['your_percentage']->name }}</p>
+                                            <h5 class="fs-18 mb-0">{{ $serviceOrder->ownership_percentage  ?? '-' }}</h5>
+                                        </div>
+                                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                                            <p class="text-muted mb-2">{{ $cmsTranslations['government_referral']->name }}</p>
+                                            <h5 class="fs-18 mb-0">{{ $serviceOrder->government_referral  ?? '-' }}</h5>
+                                        </div>
+                                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                                            <p class="text-muted mb-2">{{ $cmsTranslations['any_other_use']->name }} </p>
+                                            <h5 class="fs-18 mb-0">{{ $serviceOrder->other_use_of_report  ?? '-' }}</h5>
+                                        </div>
+                                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                                            <p class="text-muted mb-2">{{ $cmsTranslations['delivery_date']->name }}</p>
+                                            <h5 class="fs-18 mb-0">{{ \Carbon\Carbon::parse($serviceOrder->delivery_date)->format('d M Y')  ?? '-' }}</h5>
+                                        </div>
+                                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                                            <p class="text-muted mb-2">{{ $cmsTranslations['comment']->name }}</p>
+                                            <h5 class="fs-18 mb-0">{{ $serviceOrder->comment  ?? '-' }}</h5>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -164,13 +164,23 @@
             <h5>{{ $cmsTranslations['gemstones_jewelry_pc']->name }}</h5>
             <div class="card rounded-4 overflow-hidden" style="padding: 2px;">
                 <div class="accordion accordion-flush my-accordion" id="articlesAccordion">
+                    @php
+                        $hasAnyError = $errors->has('article.*.*');
+                    @endphp
                     @forelse($test->serviceOrder->articles as $index => $item)
-                        <form action="{{ route('admin.tests.update', $test->id) }}" method="POST" id="testForm" enctype="multipart/form-data">
-                            @csrf
-                            @method('PUT')
-                            <div class="accordion-item">
+                        @php
+                            $hasError = $errors->has("article.$index") || $errors->has("article.$index.*");
+                        @endphp
+                        <div class="accordion-item">
+                            <form action="{{ route('admin.tests.update', $test->id) }}" method="POST" id="testForm" enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
                                 <div class="accordion-header">
-                                    <div class="accordion-button {{ $index === 0 ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#JewelryType-{{ $item->id }}" aria-expanded="{{ $index === 0 ? 'true' : 'false' }}" aria-controls="JewelryType-{{ $item->id }}">
+                                    <div class="accordion-button {{ (!$hasAnyError && $index === 0) || $hasError ? '' : 'collapsed' }}" type="button" 
+                                        data-bs-toggle="collapse" 
+                                        data-bs-target="#JewelryType-{{ $item->id }}" 
+                                        aria-expanded="{{ (!$hasAnyError && $index === 0) || $hasError ? 'true' : 'false' }}" 
+                                        aria-controls="JewelryType-{{ $item->id }}">
                                         <div class="row g-lg-4 g-3 w-100">
                                             <div class="col-md-4">
                                                 <p class="text-muted mb-0 fs-12">{{ $cmsTranslations['jewelry_type']->name }}</p>
@@ -187,7 +197,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="JewelryType-{{ $item->id }}" class="accordion-collapse collapse {{ $index === 0 ? 'show' : '' }}" data-bs-parent="#articlesAccordion">
+                                <div id="JewelryType-{{ $item->id }}" class="accordion-collapse collapse {{ (!$hasAnyError && $index === 0) || $hasError ? 'show' : '' }}" data-bs-parent="#articlesAccordion">
                                     <div class="accordion-body">
                                         <div class="row g-lg-4 g-3">
                                             <!-- Images Section -->
@@ -1163,8 +1173,8 @@
                                     </div>
                                     <!-- Submit Buttons -->
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     @empty
                         <div class="alert alert-warning">{{ $cmsTranslations['data_not_found']->name }}</div>
                     @endforelse
